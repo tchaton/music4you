@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'my-listen',
-  template: '<h3> Listen </h3>'
+	templateUrl: 'app/listen.component.html',
+  styleUrls:  ['app/listen.component.css']
 })
-export class ListenComponent { }
+export class ListenComponent { 
+
+}	    
