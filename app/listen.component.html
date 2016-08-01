@@ -1,3 +1,7 @@
- <div id="searchContainer" >
-  <input id='query' type="text" name="texte"/>
-</div> 
+<input id="query" [ngFormControl]="search">
+
+<div *ngFor="let video of results | async">
+  <h3>{{video.snippet.title}}</h3>
+  <p>{{video.snippet}}</p>
+  <img [src]="video.snippet.thumbnails.default.url"/>
+</div>
