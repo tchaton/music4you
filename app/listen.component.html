@@ -1,7 +1,32 @@
 <input id="query" [ngFormControl]="search">
+<input id="query" [ngFormControl]="search">
 
-<div *ngFor="let video of results | async">
-  <h3>{{video.snippet.title}}</h3>
-  <p>{{video.snippet}}</p>
-  <img [src]="video.snippet.thumbnails.default.url"/>
+<div class='result-video'>
+	<div (click)='selectVideo(video,$event)' id='result/{{video.id.videoId}}' class='video' *ngFor="let video of results | async">
+	  	<div [hidden]='id==video.id.videoId && hide'>
+		  	<div class=video-image>
+		  		<img [src]="video.snippet.thumbnails.default.url"/>
+		  	</div>
+		  	<div class='video-textContainer'>
+			  	<div class="video-title">
+					<p>{{video.snippet.title}}</p>
+				</div>
+	<!-- 		  	<div class="video-description">	
+				  <p>{{video.snippet.description}}</p>
+			  	</div> -->
+		  	</div>	
+	  	</div>
+	  	<div id="player/{{video.id.videoId}}">
+	  	</div>
+	</div>
+</div>
+	<div class='result-video2'>
+	<div  class='video' *ngFor="let item of results2 | async">
+		<albums [item]='item'></albums>
+
+
+	</div>
+</div>
+<div class="controller">
+<button (click)="controlVideo()">Pause</button>
 </div>
