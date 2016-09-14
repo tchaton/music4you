@@ -13,3 +13,10 @@ Single app page with 2 query inputs linked to both spotify/YT API .
 -Create a login space 
 -When query modified , don't change data being played
 
+# Try it
+
+- git clone 'path'
+- cd music4you
+- npm install
+- npm start
+
