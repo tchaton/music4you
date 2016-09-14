@@ -37,7 +37,7 @@ export class ListenComponent {
 
       //switchMap flattens the async and cancels the pending request if a new value is requested
   }
-  selectVideo(video){
+  selectVideo(video:any){
     console.log(this.listenservice.youtube.player);
     if(this.listenservice.youtube.player == null){
           this.id = video.id.videoId;
@@ -60,5 +60,4 @@ export class ListenComponent {
     }
 
     }
-  }
-}	    
+}

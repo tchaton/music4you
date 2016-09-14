@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Http, HTTP_BINDINGS, Response} from '@angular/http';
 import { window } from '@angular/platform-browser/src/facade/browser';
-import {Video} from './video'
 
 
 const YOU_TUBE_URL = 'https://www.googleapis.com/youtube/v3/search';
@@ -13,7 +12,7 @@ const SPOTIFY_TOKEN = '9ee8664f52e84c32b690536abe4383c7';
 @Injectable()
 export class ListenService {
   private service = this;
-  public youtube = {
+  public youtube:any = {
     ready: false,
     player: null,
     playerId: null,
@@ -23,6 +22,7 @@ export class ListenService {
     playerWidth: '100%',
     state: 'stopped'
   };
+  YT:any;
   state:string;
   constructor(private _http:Http){
   }
@@ -53,8 +53,8 @@ export class ListenService {
       .map((res:Response) => res.json())
       .map(json => json.items);
   }
-  createPlayer(video:Object){
-    this.youtube.player = new YT.Player('player/'+video.id.videoId, {
+  createPlayer(video:any){
+    this.youtube.player = new this.YT.Player('player/'+video.id.videoId, {
       height: this.youtube.playerHeight,
       width: this.youtube.playerWidth,
       videoId : video.id.videoId,
@@ -74,15 +74,15 @@ export class ListenService {
   onYoutubeReady(){
   	console.log('onYoutubeReady');
   }
-  onYoutubeStateChange($event) {
+  onYoutubeStateChange($event:any) {
   	console.log('onYoutubeStateChange');
   	console.log($event);
   	let state:string;
-    if ($event.data == YT.PlayerState.PLAYING) {
+    if ($event.data == this.YT.PlayerState.PLAYING) {
       console.log('playing');
-    } else if ($event.data == YT.PlayerState.PAUSED) {
+    } else if ($event.data == this.YT.PlayerState.PAUSED) {
       console.log('paused');
-    } else if ($event.data == YT.PlayerState.ENDED) {
+    } else if ($event.data == this.YT.PlayerState.ENDED) {
       console.log('ended');
     }
   }

@@ -2,12 +2,10 @@ import {Component,Input} from '@angular/core';
 import { Control } from '@angular/common';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-import { window } from '@angular/platform-browser/src/facade/browser';
 import {ListenService} from './listen.service';
 import {Http, HTTP_BINDINGS, Response} from '@angular/http';
 import { window } from '@angular/platform-browser/src/facade/browser';
 import { SafeResourceUrl, DomSanitizationService,BROWSER_SANITIZATION_PROVIDERS } from '@angular/platform-browser';
-import {Video} from './video'
 
 const YOU_TUBE_URL = 'https://www.googleapis.com/youtube/v3/search';
 const SPOTIFY_URL = 'https://api.spotify.com/v1/search';
@@ -35,8 +33,7 @@ const SPOTIFY_TOKEN = '9ee8664f52e84c32b690536abe4383c7';
           <div *ngFor="let track of tracks" >
               <button (click)='getTrack(track)'>{{track.name}}</button>
               <div *ngIf="track === selectedTrack ">
-                <iframe [src]="getUrlPreview(track)" frameborder="0" allowtransparency="true"></iframe>
-                <iframe [src]="getUrl(track)" frameborder="0" allowtransparency="true"></iframe>
+                <iframe [src]="safeUrlPreview" frameborder="0" allowtransparency="true"></iframe>
               </div>
           </div>
       </div>
@@ -49,44 +46,46 @@ const SPOTIFY_TOKEN = '9ee8664f52e84c32b690536abe4383c7';
 
 
 export class AlbumsComponent { 
-  @Input() item;
-  albums;
-  albumId;
-  albumLoaded=false;
-  tracks;
-  selectedTrack;
+  @Input() item:any;
+  albums:any;
+  albumId:any;
+  albumLoaded:any=false;
+  tracks:any;
+  selectedTrack:any;
+  safeUrlPreview:SafeResourceUrl;
+  safeUrl:SafeResourceUrl;
   constructor(public listenservice:ListenService,public sanitizer: DomSanitizationService) {
 
   }
-  selectArtist(id) {
+  selectArtist(id:any) {
     this.listenservice.searchSpotifyAlbums(id)
                      .subscribe(
                        items => this.albums = items);
     this.albumId = id;
     this.albumLoaded = true;
   }
-  selectAlbum(id) {
+  selectAlbum(id:any) {
     this.listenservice.searchSpotifyTracks(id)
                      .subscribe(
                        items => this.tracks = items);
   }
-  getTrack(track){
+  getTrack(track:any){
     console.log("track.uri");
     console.log(track.uri);
     this.selectedTrack = track;
   }
-  getUrl:SafeResourceUrl(track)
+  getUrl(track:any)
   {
 
-       return this.sanitizer.bypassSecurityTrustResourceUrl("https://embed.spotify.com/?uri="+track.uri+"");
+       this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl("https://embed.spotify.com/?uri="+track.uri+"");
   }
-  getUrlPreview:SafeResourceUrl(track)
+  getUrlPreview(track:any)
   {
 /*       const headers: Headers = new Headers();
        headers.append('Accept', 'application/json');
        headers.append('Content-Type', 'application/json');
        headers.append('Access-Control-Allow-Origin', '*');
        return this.sanitizer.bypassSecurityTrustResourceUrl({url:"https://embed.spotify.com/?uri="+track.uri+"",headers:headers});*/
-       return this.sanitizer.bypassSecurityTrustResourceUrl(track.preview_url);
+       this.safeUrlPreview = this.sanitizer.bypassSecurityTrustResourceUrl(track.preview_url);
   }
 }   
