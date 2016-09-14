@@ -54,37 +54,45 @@ export class ListenService {
       .map(json => json.items);
   }
   createPlayer(video:any){
-    this.youtube.player = new this.YT.Player('player/'+video.id.videoId, {
-      height: this.youtube.playerHeight,
-      width: this.youtube.playerWidth,
-      videoId : video.id.videoId,
-      playerVars: {
-        rel: 1,
-        showinfo: 0,
-        controls:0,
-        autoplay:1
-      },
-      events: {
-        'onReady': this.onYoutubeReady,
-        'onStateChange': this.onYoutubeStateChange
+      if (window['YT']) {
+        console.log('onYouTubeIframeAPIReady')
+        this.youtube.player = new YT.Player('player/'+video.id.videoId, {
+        height: this.youtube.playerHeight,
+        width: this.youtube.playerWidth,
+        videoId : video.id.videoId,
+        playerVars: {
+          rel: 1,
+          showinfo: 0,
+          controls:0,
+          autoplay:1
+        },
+        events: {
+          'onReady': this.onYoutubeReady,
+          'onStateChange': this.onYoutubeStateChange
+        }
+      });
+      console.log(this.youtube);
       }
-    });
-    console.log(this.youtube);
+    console.log(window['YT'].Player);
   }
   onYoutubeReady(){
   	console.log('onYoutubeReady');
   }
   onYoutubeStateChange($event:any) {
-  	console.log('onYoutubeStateChange');
-  	console.log($event);
-  	let state:string;
-    if ($event.data == this.YT.PlayerState.PLAYING) {
-      console.log('playing');
-    } else if ($event.data == this.YT.PlayerState.PAUSED) {
-      console.log('paused');
-    } else if ($event.data == this.YT.PlayerState.ENDED) {
-      console.log('ended');
+    if(window['YT'])
+    {
+      console.log('onYoutubeStateChange');
+      console.log($event);
+      let state:string;
+      if ($event.data == YT.PlayerState.PLAYING) {
+        console.log('playing');
+      } else if ($event.data == YT.PlayerState.PAUSED) {
+        console.log('paused');
+      } else if ($event.data == YT.PlayerState.ENDED) {
+        console.log('ended');
+      }      
     }
+
   }
   destroyPlayer(){
     this.youtube.player.destroy();
