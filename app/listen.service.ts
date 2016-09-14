@@ -25,6 +25,9 @@ export class ListenService {
   YT:any;
   state:string;
   constructor(private _http:Http){
+    if(window['YT']){
+      this.YT=window['YT'];
+    }
   }
   
   searchYT(query:string){
@@ -55,8 +58,8 @@ export class ListenService {
   }
   createPlayer(video:any){
       if (window['YT']) {
-        console.log('onYouTubeIframeAPIReady')
-        this.youtube.player = new YT.Player('player/'+video.id.videoId, {
+        console.log('onYouTubeIframeAPIReady');
+        this.youtube.player = new this.YT.Player('player/'+video.id.videoId, {
         height: this.youtube.playerHeight,
         width: this.youtube.playerWidth,
         videoId : video.id.videoId,
@@ -73,7 +76,6 @@ export class ListenService {
       });
       console.log(this.youtube);
       }
-    console.log(window['YT'].Player);
   }
   onYoutubeReady(){
   	console.log('onYoutubeReady');
@@ -84,11 +86,11 @@ export class ListenService {
       console.log('onYoutubeStateChange');
       console.log($event);
       let state:string;
-      if ($event.data == YT.PlayerState.PLAYING) {
+      if ($event.data == this.YT.PlayerState.PLAYING) {
         console.log('playing');
-      } else if ($event.data == YT.PlayerState.PAUSED) {
+      } else if ($event.data == this.YT.PlayerState.PAUSED) {
         console.log('paused');
-      } else if ($event.data == YT.PlayerState.ENDED) {
+      } else if ($event.data == this.YT.PlayerState.ENDED) {
         console.log('ended');
       }      
     }
