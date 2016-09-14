@@ -33,7 +33,7 @@ const SPOTIFY_TOKEN = '9ee8664f52e84c32b690536abe4383c7';
           <div *ngFor="let track of tracks" >
               <button (click)='getTrack(track)'>{{track.name}}</button>
               <div *ngIf="track === selectedTrack ">
-                <iframe [src]="safeUrlPreview" frameborder="0" allowtransparency="true"></iframe>
+                <iframe [src]="getUrlPreview(track)" frameborder="0" allowtransparency="true"></iframe>
               </div>
           </div>
       </div>
@@ -52,8 +52,6 @@ export class AlbumsComponent {
   albumLoaded:any=false;
   tracks:any;
   selectedTrack:any;
-  safeUrlPreview:SafeResourceUrl;
-  safeUrl:SafeResourceUrl;
   constructor(public listenservice:ListenService,public sanitizer: DomSanitizationService) {
 
   }
@@ -77,15 +75,10 @@ export class AlbumsComponent {
   getUrl(track:any)
   {
 
-       this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl("https://embed.spotify.com/?uri="+track.uri+"");
+       return this.sanitizer.bypassSecurityTrustResourceUrl("https://embed.spotify.com/?uri="+track.uri+"");
   }
   getUrlPreview(track:any)
   {
-/*       const headers: Headers = new Headers();
-       headers.append('Accept', 'application/json');
-       headers.append('Content-Type', 'application/json');
-       headers.append('Access-Control-Allow-Origin', '*');
-       return this.sanitizer.bypassSecurityTrustResourceUrl({url:"https://embed.spotify.com/?uri="+track.uri+"",headers:headers});*/
-       this.safeUrlPreview = this.sanitizer.bypassSecurityTrustResourceUrl(track.preview_url);
+       return this.sanitizer.bypassSecurityTrustResourceUrl(track.preview_url);
   }
 }   
