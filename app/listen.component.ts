@@ -67,9 +67,6 @@ export class ListenComponent {
 
     }
     handleMyEvent(event:any){
-      console.log(event.target.value);
-      this.search2.innerValue = event.target.value;
-      console.log(this.search2);
       this.queryYT = event.target.value;
     }
 }

@@ -3,7 +3,6 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { window } from '@angular/platform-browser/src/facade/browser';
 import {AlbumsComponent} from "./albums.component";
 import {Http, HTTP_BINDINGS, Response,Headers} from '@angular/http';
-import {TrackComponent} from './track.component';
 
 @Component({
   selector: 'music4you',
@@ -25,7 +24,7 @@ import {TrackComponent} from './track.component';
 </div>
 
   `,
-  directives: [ROUTER_DIRECTIVES,AlbumsComponent,TrackComponent],
+  directives: [ROUTER_DIRECTIVES,AlbumsComponent],
   styleUrls:  ['app/app.component.css']
 })
 export class AppComponent {

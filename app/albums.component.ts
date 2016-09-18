@@ -49,7 +49,7 @@ const SPOTIFY_TOKEN = '9ee8664f52e84c32b690536abe4383c7';
 
 export class AlbumsComponent { 
   @Input() item:any;
-  @Output() selectedTrackEvent:EventEmitter= new EventEmitter();
+  @Output() selectedTrackEvent:EventEmitter<any>= new EventEmitter();
   albums:any;
   albumId:any;
   albumLoaded:any=false;
@@ -88,6 +88,5 @@ export class AlbumsComponent {
   suppres(track:any){
     let el : HTMLElement = this._elementRef.nativeElement;
     el.parentNode.removeChild(el);
-
   }
 }   
