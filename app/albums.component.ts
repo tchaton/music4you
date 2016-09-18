@@ -1,4 +1,4 @@
-import {Component,Input} from '@angular/core';
+import {Component,Input,Output,EventEmitter,ElementRef} from '@angular/core';
 import { Control } from '@angular/common';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
@@ -17,6 +17,7 @@ const SPOTIFY_TOKEN = '9ee8664f52e84c32b690536abe4383c7';
 	template : `
   <div *ngIf="item" (click)="selectArtist(item.id)">
     <img class="imageArtist" [hidden]='albumId == item.id && albumLoaded==true'  *ngIf="item.images[0]" [src]="item.images[0].url"/>
+    {{item.name}}
   </div>
   <div *ngIf="albums" >
   <div id="albumsContainer">
@@ -31,10 +32,11 @@ const SPOTIFY_TOKEN = '9ee8664f52e84c32b690536abe4383c7';
     <div class="description">
       <div *ngIf="tracks" >
           <div *ngFor="let track of tracks" >
-              <button (click)='getTrack(track)'>{{track.name}}</button>
-              <div *ngIf="track === selectedTrack ">
-                <iframe [src]="getUrlPreview(track)" frameborder="0" allowtransparency="true"></iframe>
-              </div>
+              <button value='{{item.name}} {{track.name}}' (click)='getTrack(track,$event)'>{{track.name}}</button>
+              <!--<div *ngIf="track === selectedTrack ">
+                <iframe class="iframe" id="track.id" [src]="getUrlPreview(track)" frameborder="0" allowtransparency="true"></iframe>
+                <button (click)='suppres(track)'>suppress</button>
+              </div>-->
           </div>
       </div>
     </div>
@@ -47,13 +49,14 @@ const SPOTIFY_TOKEN = '9ee8664f52e84c32b690536abe4383c7';
 
 export class AlbumsComponent { 
   @Input() item:any;
+  @Output() selectedTrackEvent:EventEmitter= new EventEmitter();
   albums:any;
   albumId:any;
   albumLoaded:any=false;
   tracks:any;
   selectedTrack:any;
-  constructor(public listenservice:ListenService,public sanitizer: DomSanitizationService) {
-
+  constructor(public listenservice:ListenService,public sanitizer: DomSanitizationService,private _elementRef : ElementRef) {
+   
   }
   selectArtist(id:any) {
     this.listenservice.searchSpotifyAlbums(id)
@@ -67,10 +70,11 @@ export class AlbumsComponent {
                      .subscribe(
                        items => this.tracks = items);
   }
-  getTrack(track:any){
+  getTrack(track:any,event:any){
     console.log("track.uri");
     console.log(track.uri);
     this.selectedTrack = track;
+    this.selectedTrackEvent.next(event);
   }
   getUrl(track:any)
   {
@@ -80,5 +84,10 @@ export class AlbumsComponent {
   getUrlPreview(track:any)
   {
        return this.sanitizer.bypassSecurityTrustResourceUrl(track.preview_url);
+  }
+  suppres(track:any){
+    let el : HTMLElement = this._elementRef.nativeElement;
+    el.parentNode.removeChild(el);
+
   }
 }   

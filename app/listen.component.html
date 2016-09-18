@@ -1,7 +1,7 @@
-<input id="query" [ngFormControl]="search">
-<input id="query" [ngFormControl]="search">
+<input id="query" [(ngModel)]="querySpotify" [ngFormControl]="search">
+<input id="query2" [(ngModel)]="queryYT" [ngFormControl]="search2">
 
-<div class='result-video'>
+<div class='result-video2'>
 	<div (click)='selectVideo(video,$event)' id='result/{{video.id.videoId}}' class='video' *ngFor="let video of results | async">
 	  	<div [hidden]='id==video.id.videoId && hide'>
 		  	<div class=video-image>
@@ -20,9 +20,9 @@
 	  	</div>
 	</div>
 </div>
-	<div class='result-video2'>
+	<div class='result-video'>
 	<div  class='video' *ngFor="let item of results2 | async">
-		<albums [item]='item'></albums>
+		<albums (selectedTrackEvent)='handleMyEvent($event)' [item]='item'></albums>
 
 
 	</div>

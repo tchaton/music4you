@@ -4,6 +4,8 @@ a{ cursor: pointer;}
 
 #query{ width:50%;background: #ac0809; border: none; border-radius: 20px; color: white; float: left; height: 35px; line-height: 30px; padding: 5px 20px;}
 #query:focus{ outline: none;}
+#query2{ width:50%;background: #ac0809; border: none; border-radius: 20px; color: white; float: left; height: 35px; line-height: 30px; padding: 5px 20px;}
+#query2:focus{ outline: none;}
 
 .result-video{
 	background-color: blue;

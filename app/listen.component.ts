@@ -18,22 +18,28 @@ export class ListenComponent {
   artist:Observable<any>;
   hide:boolean=false;
   search = new Control();
+  search2 = new Control();
   results: Observable<any>;
   results2: Observable<any>;
+  querySpotify:string;
+  queryYT:string;
   constructor(public listenservice:ListenService) {
 
    //observable of results
    this.results = 
    //input value change observable
-    this.search.valueChanges
+    this.search2.valueChanges
       .debounceTime(200) //debounce for 200ms
       .switchMap(query => listenservice.searchYT(query));
+
+
 
    this.results2 = 
    //input value change observable
     this.search.valueChanges
       .debounceTime(200) //debounce for 200ms
       .switchMap(query => listenservice.searchSpotify(query));
+
 
       //switchMap flattens the async and cancels the pending request if a new value is requested
   }
@@ -59,5 +65,11 @@ export class ListenComponent {
           this.listenservice.play();
     }
 
+    }
+    handleMyEvent(event:any){
+      console.log(event.target.value);
+      this.search2.innerValue = event.target.value;
+      console.log(this.search2);
+      this.queryYT = event.target.value;
     }
 }
