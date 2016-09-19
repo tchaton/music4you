@@ -1,6 +1,6 @@
 <input id="query" [(ngModel)]="querySpotify" [ngFormControl]="search">
 <input id="query2" [(ngModel)]="queryYT" [ngFormControl]="search2">
-
+<div></div>
 
 <div class='result-video2'>
 	<div id="player">
@@ -34,5 +34,8 @@
 	</div>
 </div>
 <div class="controller">
-<button (click)="controlVideo()">Pause</button>
+	<div class="controlsButton">
+		<img (click)="controlVideo()" class="controlButton" *ngIf="state == 'playing'" src="./app/images/play.png" >
+		<img (click)="controlVideo()" class="controlButton" *ngIf="state == 'paused'" src="./app/images/pause.jpg" >
+	</div>
 </div>

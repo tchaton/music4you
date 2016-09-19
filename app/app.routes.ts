@@ -10,6 +10,10 @@ const routes: RouterConfig = [
   {
     path: 'listen',
     component: ListenComponent
+  },
+  {
+    path: '',
+    component: LoginComponent  	
   }
 ];
 

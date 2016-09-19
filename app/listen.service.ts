@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable,EventEmitter } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Http, HTTP_BINDINGS, Response} from '@angular/http';
 import { window } from '@angular/platform-browser/src/facade/browser';
@@ -23,6 +23,7 @@ export class ListenService {
     state: 'stopped'
   };
   YT:any;
+  stateEvent: EventEmitter<any> = new EventEmitter();
   state:string;
   constructor(private _http:Http){
     if(window['YT']){
@@ -35,13 +36,7 @@ export class ListenService {
       .map((res:Response) => res.json())
       .map(json => json.items);
   }
-/*  searchSpotify(query:string){
-    return this._http.get(`${SPOTIFY_URL}/artists/`+query+`/albums`)
-      .map((res:Response) => res.json())
-      .map(json => json.artists.items);
-  }*/
   searchSpotify(query:string){
-  	console.log("searchSpotify");
     return this._http.get(`${SPOTIFY_URL}?q=${query}&type=artist&key=${SPOTIFY_TOKEN}`)
       .map((res:Response) => res.json())
       .map(json => json.artists.items);
@@ -58,7 +53,6 @@ export class ListenService {
   }
   createPlayer(video:any){
       if (window['YT']) {
-        console.log('onYouTubeIframeAPIReady');
         this.youtube.player = new this.YT.Player('player', {
         height: this.youtube.playerHeight,
         width: this.youtube.playerWidth,
@@ -71,29 +65,13 @@ export class ListenService {
         },
         events: {
           'onReady': this.onYoutubeReady,
-          'onStateChange': this.onYoutubeStateChange
+          'onStateChange': ((ev:any) => this.emitStateEvent(ev))
         }
       });
-      console.log(this.youtube);
       }
   }
   onYoutubeReady(){
-  	console.log('onYoutubeReady');
-  }
-  onYoutubeStateChange($event:any) {
-    if(window['YT'])
-    {
-      console.log('onYoutubeStateChange');
-      console.log($event);
-      if ($event.data == this.YT.PlayerState.PLAYING) {
-        console.log('playing');
-      } else if ($event.data == this.YT.PlayerState.PAUSED) {
-        console.log('paused');
-      } else if ($event.data == this.YT.PlayerState.ENDED) {
-        console.log('ended');
-      }      
-    }
-
+    console.log('onYoutubeReady');
   }
   destroyPlayer(){
     this.youtube.player.destroy();
@@ -106,7 +84,17 @@ export class ListenService {
   play(){
   	this.youtube.player.playVideo();
   }
+  pause(){
+    this.youtube.player.pauseVideo();
+  }
   queue(id:string){
     this.youtube.player.cueVideoById(id);
+  }
+  emitStateEvent(event:any) {
+    console.log('emitStateChange');
+    this.stateEvent.emit(event);
+  }
+  getStateEvent() {
+    return this.stateEvent;
   }
 }

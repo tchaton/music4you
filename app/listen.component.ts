@@ -24,6 +24,9 @@ export class ListenComponent {
   querySpotify:string;
   queryYT:string;
   videoSelected:any;
+  subscription: any;
+  state:string='';
+  stateNumber:number;
   constructor(public listenservice:ListenService) {
 
    //observable of results
@@ -41,7 +44,20 @@ export class ListenComponent {
       .debounceTime(200) //debounce for 200ms
       .switchMap(query => listenservice.searchSpotify(query));
 
-
+    this.subscription = this.listenservice.getStateEvent()
+      .subscribe((event:any) => 
+        {if(event.data == 0) 
+        {
+          this.state='ended';
+        } else if (event.data == 1) 
+        {
+          this.state='playing';
+        }else if (event.data == 2)
+        {
+          this.state='paused';
+        }else
+        {this.state='loading';
+        }});
       //switchMap flattens the async and cancels the pending request if a new value is requested
   }
   selectVideo(video:any){
@@ -66,8 +82,13 @@ export class ListenComponent {
     this.state = this.listenservice.getYoutube().state;
   }*/
   controlVideo(){
-    if(this.listenservice.youtube.player != null){
-          this.listenservice.play();
+    if(this.state == 'paused'){
+      console.log('do play');
+      this.listenservice.play();
+    }
+    else if(this.state == 'playing'){
+      console.log('do pause');
+      this.listenservice.pause();
     }
 
   }
