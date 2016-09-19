@@ -23,6 +23,7 @@ export class ListenComponent {
   results2: Observable<any>;
   querySpotify:string;
   queryYT:string;
+  videoSelected:any;
   constructor(public listenservice:ListenService) {
 
    //observable of results
@@ -44,17 +45,21 @@ export class ListenComponent {
       //switchMap flattens the async and cancels the pending request if a new value is requested
   }
   selectVideo(video:any){
-    console.log(this.listenservice.youtube.player);
+    this.videoSelected = video;
+    console.log(this.listenservice.youtube.player == null);
     if(this.listenservice.youtube.player == null){
           this.id = video.id.videoId;
           this.hide = true;
           this.listenservice.createPlayer(video);
     }
     else{
+      console.log(this.listenservice.youtube.player);
+      if(this.listenservice.youtube.player.a.value != video.id.videoId){
       this.listenservice.destroyPlayer();
       this.id = video.id.videoId;
       this.hide = true;
-      this.listenservice.createPlayer(video);
+      this.listenservice.createPlayer(video);        
+      }
     }
   }
 /*  getYTState(){
@@ -65,8 +70,14 @@ export class ListenComponent {
           this.listenservice.play();
     }
 
-    }
-    handleMyEvent(event:any){
+  }
+  handleMyEvent(event:any){
+      console.log(event.target.value);
       this.queryYT = event.target.value;
-    }
+  }
+  queue(id:string)
+  {
+    console.log('queue');
+    this.listenservice.queue(id);
+  }
 }

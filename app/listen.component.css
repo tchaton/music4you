@@ -33,6 +33,7 @@ a{ cursor: pointer;}
 
 }
 .video{ cursor: pointer; min-height: 90px; padding:10px;position: relative;overflow: hidden;}
+.videoContainer{ width: 100%;height: 100%;background-color: red;}
 .video:nth-child(2n-1){ background: #cccccc;}
 .video-title{ font-weight: bold;text-align:center;}
 .video:hover{ background: #22242a; color: white;}
@@ -41,4 +42,11 @@ a{ cursor: pointer;}
 .video-textContainer{position: relative;margin-left: 25%;}
 .video-description{}
 
-
+.playerIFrame{
+	position: fixed;
+	width: 100%;
+	height: calc(width * 1.75);
+}
+.highlight{
+	color:red;
+}

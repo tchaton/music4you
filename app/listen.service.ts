@@ -59,14 +59,14 @@ export class ListenService {
   createPlayer(video:any){
       if (window['YT']) {
         console.log('onYouTubeIframeAPIReady');
-        this.youtube.player = new this.YT.Player('player/'+video.id.videoId, {
+        this.youtube.player = new this.YT.Player('player', {
         height: this.youtube.playerHeight,
         width: this.youtube.playerWidth,
         videoId : video.id.videoId,
         playerVars: {
           rel: 1,
           showinfo: 0,
-          controls:0,
+          controls:1,
           autoplay:1
         },
         events: {
@@ -85,7 +85,6 @@ export class ListenService {
     {
       console.log('onYoutubeStateChange');
       console.log($event);
-      let state:string;
       if ($event.data == this.YT.PlayerState.PLAYING) {
         console.log('playing');
       } else if ($event.data == this.YT.PlayerState.PAUSED) {
@@ -106,5 +105,8 @@ export class ListenService {
   }
   play(){
   	this.youtube.player.playVideo();
+  }
+  queue(id:string){
+    this.youtube.player.cueVideoById(id);
   }
 }

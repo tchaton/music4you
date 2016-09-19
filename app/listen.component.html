@@ -1,9 +1,12 @@
 <input id="query" [(ngModel)]="querySpotify" [ngFormControl]="search">
 <input id="query2" [(ngModel)]="queryYT" [ngFormControl]="search2">
 
+
 <div class='result-video2'>
-	<div (click)='selectVideo(video,$event)' id='result/{{video.id.videoId}}' class='video' *ngFor="let video of results | async">
-	  	<div [hidden]='id==video.id.videoId && hide'>
+	<div id="player">
+	</div>
+	<div (click)='selectVideo(video,$event)' id='result/{{video.id.videoId}}' class='video' *ngFor="let video of results | async" >
+	  	<div   [class.highlight]="videoSelected === video" ><!--[hidden]='id==video.id.videoId && hide' -->
 		  	<div class=video-image>
 		  		<img [src]="video.snippet.thumbnails.default.url"/>
 		  	</div>
@@ -16,7 +19,10 @@
 			  	</div> -->
 		  	</div>	
 	  	</div>
-	  	<div id="player/{{video.id.videoId}}">
+	  	<div  id="player/{{video.id.videoId}}" ></div>
+	  	<div>
+	  		<button (click)="queue(video.id.videoId)">Queue</button>
+	  		<button>Add</button>
 	  	</div>
 	</div>
 </div>
