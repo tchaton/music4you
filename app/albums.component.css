@@ -10,6 +10,7 @@
 .description{
     height: auto;
 	width: 100%;
+	margin-top: 20px;
 }
 .imageArtist{
 	height: 100%;
@@ -21,3 +22,11 @@
 .artist-image{width: 25%;float:left;}
 .artist-textContainer{position: relative;margin-left: 25%;}
 .artist-description{}
+.circle{
+	width: calc(100%*0.8);
+	height: calc(width);
+	border-radius: 50%;
+}
+.tracks{
+	margin-top: 10px;
+}

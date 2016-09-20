@@ -9,7 +9,7 @@
 <div class='result-video2'>
 	<div id="player">
 	</div>
-	<div [class.highlight]="videoSelected === video" (click)='selectVideo(video,$event)' id='result/{{video.id.videoId}}' class='video' *ngFor="let video of results | async" >
+	<div [class.highlight]="videoSelected === video" (mouseleave)='mouseLeave()' (mouseover)='mouseOVer(video)' (click)='selectVideo(video,$event)' id='result/{{video.id.videoId}}' class='video' *ngFor="let video of results | async" >
 	  	<div ><!--[hidden]='id==video.id.videoId && hide' -->
 		  	<div class=video-image>
 		  		<img [class.circle]="videoSelected === video" [src]="video.snippet.thumbnails.default.url"/>
@@ -24,14 +24,15 @@
 		  	</div>	
 	  	</div>
 	  	<div  id="player/{{video.id.videoId}}" ></div>
-	  	<div>
+	  	
+	  	<div *ngIf='videoMouseOver === video'>
 	  		<button (click)="queue(video.id.videoId)">Queue</button>
 	  		<button>Add</button>
 	  	</div>
 	</div>
 </div>
 	<div class='result-video'>
-	<div  class='video' *ngFor="let item of results2 | async">
+	<div  [class.albumMouseOver]='albumsMouseOver === item' (mouseover)="mouseOverSpotify(item)" class='video' *ngFor="let item of results2 | async">
 		<albums (selectedTrackEvent)='handleMyEvent($event)' [item]='item'></albums>
 
 

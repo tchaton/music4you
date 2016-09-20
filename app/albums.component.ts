@@ -22,16 +22,16 @@ const SPOTIFY_TOKEN = '9ee8664f52e84c32b690536abe4383c7';
   <div *ngIf="albums" >
   <div id="albumsContainer">
     <div class="album" *ngFor="let album of albums" >
-     <div class="row">
-      <div class="col-md-4">
-        <img (mouseenter)="getTimeEnter()"  (mouseover)="selectAlbum(album.id)" *ngIf="album.images[0]" [src]="album.images[0].url"  width="auto" height="100px" />
-      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <img class='circle' (mouseenter)="getTimeEnter()"  (mouseover)="selectAlbum(album.id)" *ngIf="album.images[0]" [src]="album.images[0].url"  width="auto" height="100px" />
+        </div>
       </div>
     </div>
     </div>
     <div class="description">
       <div *ngIf="tracks" >
-          <div *ngFor="let track of tracks" >
+          <div *ngFor="let track of tracks" class='tracks'>
               <button value='{{item.name}} {{track.name}}' (click)='getTrack(track,$event)'>{{track.name}}</button>
               <!--<div *ngIf="track === selectedTrack ">
                 <iframe class="iframe" id="track.id" [src]="getUrlPreview(track)" frameborder="0" allowtransparency="true"></iframe>

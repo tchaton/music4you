@@ -24,9 +24,11 @@ export class ListenComponent {
   querySpotify:string;
   queryYT:string;
   videoSelected:any;
+  videoMouseOver:any;
   subscription: any;
   state:string='';
   stateNumber:number;
+  albumsMouseOver:any;
   constructor(public listenservice:ListenService) {
 
    //observable of results
@@ -100,5 +102,16 @@ export class ListenComponent {
   {
     console.log('queue');
     this.listenservice.queue(id);
+  }
+  mouseOVer(video:any){
+    console.log(video);
+    this.videoMouseOver = video;
+
+  }
+  mouseLeave(){
+    this.videoMouseOver = null;
+  }
+  mouseOverSpotify(albums:any){
+    this.albumsMouseOver = albums;
   }
 }

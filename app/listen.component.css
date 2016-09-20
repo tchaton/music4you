@@ -29,7 +29,8 @@ position: relative; left: 0; bottom: 0
 #query2:focus{ outline: none;}
 
 .result-video{
-	background-color: rgba(100,0,3,0.3);
+/*	background-color: rgba(100,0,3,0.3);*/
+	background-image: linear-gradient(rgba(0,0,0,.3),rgba(100,0,3,0.3));
 	float:left;
 	width:50%;
 	position:relative;
@@ -41,7 +42,7 @@ position: relative; left: 0; bottom: 0
 
 }
 .result-video2{
-	background-color: rgba(100,0,3,0.5);
+	background-image: linear-gradient(rgba(0,0,0,.3),rgba(100,0,3,0.3));
 	width: 50%;
 	float:right;
 	overflow:auto;
@@ -73,15 +74,31 @@ position: relative; left: 0; bottom: 0
 	width: 100%;
 	height: calc(width * 1.75);
 }
-.highlight{
-	color:#bc4347;
+.highlight:nth-child(2n){
+	color:#60E1DC;
     border-right:4px solid #bc4347;
     border-left:10px solid black;
     border-bottom:4px solid #bc4347;
     border-top:4px solid #bc4347;
 }
+.highlight:nth-child(2n):hover{
+	color:white;
+}
+.highlight:nth-child(2n-1){
+	color:#005E5A;
+    border-right:4px solid #bc4347;
+    border-left:10px solid black;
+    border-bottom:4px solid #bc4347;
+    border-top:4px solid #bc4347;
+}
+.highlight:nth-child(2n-1):hover{
+	color:white;
+}
 .circle{
-		border-radius: 50%;
+	border-radius: 50%;
+}
+.albumMouseOver{
+	border-left: 10px solid black;
 
 }
 .controlsButton{
