@@ -55,7 +55,7 @@ export class AlbumsComponent {
   albumLoaded:any=false;
   tracks:any;
   selectedTrack:any;
-  timeEnter:any;
+  timeEnter:any=new Date();
   timeMouseOver:any;
   constructor(public listenservice:ListenService,public sanitizer: DomSanitizationService,private _elementRef : ElementRef) {
    
@@ -70,7 +70,7 @@ export class AlbumsComponent {
   selectAlbum(id:any) {
     this.timeMouseOver = new Date();
     console.log(this.timeMouseOver-this.timeEnter);
-    if(this.timeMouseOver-this.timeEnter>250)
+    if(this.timeMouseOver-this.timeEnter>300)
     {
       this.listenservice.searchSpotifyTracks(id)
                      .subscribe(

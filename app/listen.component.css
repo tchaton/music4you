@@ -6,30 +6,30 @@ a{ cursor: pointer;}
 	width: 95%;
 	height: 35px;
 }
-.menu{
-	position: absolute;
-	top:0px;
-	left: 0px;
-	width: 35px;
-	height: 35px;
+.selectorYT{
+/*	position: absolute;
+	top:80px;
+	width: 100%;
+	height: 20px;
+	background-color:#A53030;
+*/
 }
 .searchPanel{
 	width: 100%;
-	height: 100px;
+	height: 40px;
 /*	background-color:#A53030;	*/
-	background-color:black;	
-	z-index: 0;
+	background-color:rgba(65,19,19,0.8);	
 }
 .optionsYT{
 position: relative; left: 0; bottom: 0
 }
-#query{ text-align:center;width:50%;background: #ac0809; border: none; border-radius: 20px; color: white; float: right; height: 35px; line-height: 30px; padding: 5px 20px;}
+#query{ margin-top:2px;text-align:center;width:50%;background: #bc4347; border: none; border-radius: 20px; color: white; float: right; height: 35px; line-height: 30px; padding: 5px 20px;}
 #query:focus{ outline: none;}
-#query2{text-align:center; width:50%;background: #ac0809; border: none; border-radius: 20px; color: white; float: right; height: 35px; line-height: 30px; padding: 5px 20px;}
+#query2{margin-top:2px;text-align:center; width:50%;background: #bc4347; border: none; border-radius: 20px; color: white; float: right; height: 35px; line-height: 30px; padding: 5px 20px;}
 #query2:focus{ outline: none;}
 
 .result-video{
-	background-color: blue;
+	background-color: rgba(100,0,3,0.3);
 	float:left;
 	width:50%;
 	position:relative;
@@ -41,7 +41,7 @@ position: relative; left: 0; bottom: 0
 
 }
 .result-video2{
-	background-color: green;
+	background-color: rgba(100,0,3,0.5);
 	width: 50%;
 	float:right;
 	overflow:auto;
@@ -55,7 +55,7 @@ position: relative; left: 0; bottom: 0
 	width: 100%;
 	bottom:0px;
 	height: 80px;
-	background-color: yellow;
+	background-color: rgba(65,19,19,0.8);
 
 }
 .video{ cursor: pointer; min-height: 90px; padding:10px;position: relative;overflow: hidden;}
@@ -75,9 +75,6 @@ position: relative; left: 0; bottom: 0
 }
 .highlight{
 	color:red;
-}
-.selectorYT{
-	top:120px;
 }
 .controlsButton{
     width:100%;

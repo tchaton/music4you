@@ -3,7 +3,7 @@
   width: 150px;
   height: 100%;
   display:table-cell;
-  background-color: #ac0809;
+  background-color: rgba(90,18,15,0.5);
 }
 .sidebar2 {
   width: 0px;
