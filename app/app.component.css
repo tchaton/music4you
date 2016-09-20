@@ -3,7 +3,7 @@
   width: 150px;
   height: 100%;
   display:table-cell;
-  background-color: #22242a;
+  background-color: #ac0809;
 }
 .sidebar2 {
   width: 0px;
@@ -23,8 +23,13 @@
 
 .sidebar-nav{
     position: absolute;
-    top: 10px;
-    left: 5px;
+    top: 20px;
+    left: 0px;
+    width: 110px;
+    list-style-type: none;
+}
+.sidebar-nav ul{
+    width: 100%;
 }
 .sidebar-nav2{
   width: 0px;
@@ -41,4 +46,43 @@
   width: 35px;
   height: 35px;
   z-index:9999;
+}
+.menu2{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 35px;
+  height: 35px;
+  z-index:9999;
+}
+a{
+  text-decoration:none;
+}
+.routerLinkLogin{
+  position: absolute;
+  top:40px;
+  left: 0px;
+  width: 100%;
+  text-align: center;
+  text-shadow: -0.25px 0 black, 0 0.25px black, 0.25px 0 black, 0 -0.25px black;
+  color:#A53030;
+  font-size: 200%;
+}
+.routerLinkListen{
+  position: absolute;
+  top:85px;
+  left: 0px;
+  width: 100%;
+  text-align: center;
+  color:#A53030;
+  text-shadow: -0.25px 0 black, 0 0.25px black, 0.25px 0 black, 0 -0.25px black;
+  font-size: 200%;
+}
+.active{
+  background-color: #A53030;
+  border-left:20px solid  #A53030;
+  font-style: bold;
+  text-shadow: -0.25px 0 black, 0 0.25px black, 0.25px 0 black, 0 -0.25px black;
+  color:#ac0809;
+  font-size: 200%;
 }

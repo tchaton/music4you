@@ -13,15 +13,15 @@ import {Http, HTTP_BINDINGS, Response,Headers} from '@angular/http';
             <ul [class.sidebar-nav]="istoglled" [class.sidebar-nav2]="!istoglled" [hidden]="!istoglled">
             
               <li>
-              <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
+              <a [routerLink]="['/login']" class="routerLinkLogin" routerLinkActive="active">  Login</a>
               </li>
               <li>
-                  <a [routerLink]="['/listen']" routerLinkActive="active">listen</a>
+                  <a [routerLink]="['/listen']" class="routerLinkListen" routerLinkActive="active">  Listen</a>
               </li>
             </ul>
     </div>
     <div id='view'>
-      <img class="menu" (click)='toggle()' [hidden]='istoglled' src='./app/images/menu.png'>
+      <img class="menu2" (click)='toggle()' [hidden]='istoglled' src='./app/images/menu.png'>
       <router-outlet ></router-outlet>
   </div>
 </div>

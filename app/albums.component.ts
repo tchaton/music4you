@@ -24,7 +24,7 @@ const SPOTIFY_TOKEN = '9ee8664f52e84c32b690536abe4383c7';
     <div class="album" *ngFor="let album of albums" >
      <div class="row">
       <div class="col-md-4">
-        <img (mouseover)="selectAlbum(album.id)" *ngIf="album.images[0]" [src]="album.images[0].url"  width="auto" height="100px" />
+        <img (mouseenter)="getTimeEnter()"  (mouseover)="selectAlbum(album.id)" *ngIf="album.images[0]" [src]="album.images[0].url"  width="auto" height="100px" />
       </div>
       </div>
     </div>
@@ -55,6 +55,8 @@ export class AlbumsComponent {
   albumLoaded:any=false;
   tracks:any;
   selectedTrack:any;
+  timeEnter:any;
+  timeMouseOver:any;
   constructor(public listenservice:ListenService,public sanitizer: DomSanitizationService,private _elementRef : ElementRef) {
    
   }
@@ -66,9 +68,15 @@ export class AlbumsComponent {
     this.albumLoaded = true;
   }
   selectAlbum(id:any) {
-    this.listenservice.searchSpotifyTracks(id)
+    this.timeMouseOver = new Date();
+    console.log(this.timeMouseOver-this.timeEnter);
+    if(this.timeMouseOver-this.timeEnter>250)
+    {
+      this.listenservice.searchSpotifyTracks(id)
                      .subscribe(
                        items => this.tracks = items);
+    }
+
   }
   getTrack(track:any,event:any){
     console.log("track.uri");
@@ -88,5 +96,8 @@ export class AlbumsComponent {
   suppres(track:any){
     let el : HTMLElement = this._elementRef.nativeElement;
     el.parentNode.removeChild(el);
+  }
+  getTimeEnter(){
+    this.timeEnter = new Date();
   }
 }   
