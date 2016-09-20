@@ -74,7 +74,15 @@ position: relative; left: 0; bottom: 0
 	height: calc(width * 1.75);
 }
 .highlight{
-	color:red;
+	color:#bc4347;
+    border-right:4px solid #bc4347;
+    border-left:10px solid black;
+    border-bottom:4px solid #bc4347;
+    border-top:4px solid #bc4347;
+}
+.circle{
+		border-radius: 50%;
+
 }
 .controlsButton{
     width:100%;

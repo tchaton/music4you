@@ -9,10 +9,10 @@
 <div class='result-video2'>
 	<div id="player">
 	</div>
-	<div (click)='selectVideo(video,$event)' id='result/{{video.id.videoId}}' class='video' *ngFor="let video of results | async" >
-	  	<div   [class.highlight]="videoSelected === video" ><!--[hidden]='id==video.id.videoId && hide' -->
+	<div [class.highlight]="videoSelected === video" (click)='selectVideo(video,$event)' id='result/{{video.id.videoId}}' class='video' *ngFor="let video of results | async" >
+	  	<div ><!--[hidden]='id==video.id.videoId && hide' -->
 		  	<div class=video-image>
-		  		<img [src]="video.snippet.thumbnails.default.url"/>
+		  		<img [class.circle]="videoSelected === video" [src]="video.snippet.thumbnails.default.url"/>
 		  	</div>
 		  	<div class='video-textContainer'>
 			  	<div class="video-title">
