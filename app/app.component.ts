@@ -8,8 +8,10 @@ import {Http, HTTP_BINDINGS, Response,Headers} from '@angular/http';
   selector: 'music4you',
   template: `
 <div class="container">
-    <div id="sidebar">
-            <ul class="sidebar-nav">
+    <div [class.sidebar]="istoglled" [class.sidebar2]="!istoglled">
+            <img class="toggleButton menu"(click)='toggle()' [hidden]='!istoglled' src='./app/images/menu.png'>
+            <ul [class.sidebar-nav]="istoglled" [class.sidebar-nav2]="!istoglled" [hidden]="!istoglled">
+            
               <li>
               <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
               </li>
@@ -19,14 +21,22 @@ import {Http, HTTP_BINDINGS, Response,Headers} from '@angular/http';
             </ul>
     </div>
     <div id='view'>
-    <router-outlet></router-outlet>
+      <img class="menu" (click)='toggle()' [hidden]='istoglled' src='./app/images/menu.png'>
+      <router-outlet ></router-outlet>
   </div>
 </div>
 
   `,
   directives: [ROUTER_DIRECTIVES,AlbumsComponent],
-  styleUrls:  ['app/app.component.css']
+  styleUrls:  ['app/app.component.css'],
 })
 export class AppComponent {
+  istoglled:boolean=true;
+  contrustor(){
+  }
+  toggle(){
+    console.log(this.istoglled)
+    this.istoglled=!this.istoglled;
+  }
 
 }
